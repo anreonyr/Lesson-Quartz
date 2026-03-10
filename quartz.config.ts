@@ -15,7 +15,7 @@ const config: QuartzConfig = {
     analytics: null,
     locale: "en-US",
     baseUrl: "sosiristseng.github.io/template-quartz",
-    ignorePatterns: [".obsidian", "模板", "*.base", "LOGS.md"],
+    ignorePatterns: ["private", "_templates", ".obsidian"],
     defaultDateType: "modified",
     theme: {
       fontOrigin: "googleFonts",
