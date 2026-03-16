@@ -7,7 +7,7 @@ tags:
 date: 2026-03-10T00:03:00
 passed: true
 ---
-# 工具入门
+# 第一个让AI编写的程序？
 
 市面上的AI编程工具繁多，本章将介绍主流工具的特点，帮助你选择适合自己的工具。
 
@@ -67,16 +67,24 @@ passed: true
 - [下载](https://github.com/jesseduffield/lazygit/releases/tag/v0.60.0) [[工具-lazygit|lazygit]]
 - [注册](https://github.com/join) [[工具-github|github]]
 
-#### 第一个prompt示例
-
-你可以尝试向AI发送以下问题：
-
-> 请用Python写多个不同实现计算斐波那契数列的函数
-
 ### 简单流程
 
+#### 流程概览
+
 使用 OpenCode + Zed + GitHub + Lazygit
-本实践将带你完成一个完整的开发流程：创建 GitHub 仓库 → 克隆到本地 → 用 AI 辅助开发 → 提交推送。
+
+```mermaid
+flowchart LR
+    A[创建 GitHub 仓库] --> B[克隆到本地]
+    B --> C[创建 develop 分支]
+    C --> D[初始化项目 uv init]
+    D --> E[打开项目 opencode . 或 zed .]
+    E --> F[发送 prompt 让 AI 编写代码]
+    F --> G[用 uv 运行 uv run main.py]
+    G --> H[提交代码 lazygit]
+    H --> I[推送到远程 lazygit]
+    I --> J[创建 Pull Request]
+```
 
 #### 创建 GitHub 仓库
 
@@ -94,6 +102,7 @@ git clone https://github.com/你的用户名/fibonacci.git
 cd fibonacci
 ```
 
+> [!TIP] 提示
 > 其实你现在对于Git来说是无名氏，她可不会回应一个陌生人 :-<
 > 你得填写自己的名字和邮箱
 > 具体怎么填，问AI吧 :->
@@ -107,11 +116,13 @@ cd fibonacci
 	2. 按'n'弹出创建面板
 	3. 新分支名叫'develop'
 
+> [!NOTE] 成就
 > 你已经达成成就 ==第一个分支== ;-)
 #### 初始化项目
 
 用uv来初始化项目
 
+> [!TIP] 提示
 > 如果有问题请看uv的使用文档
 
 ```bash
@@ -120,6 +131,7 @@ uv init
 
 #### 第一个提交
 
+> [!INFO] 碎碎念念
 > 其实第一个提交是'Initial commit'，github帮你做的 ;-)
 
 在 lazygit 中：
@@ -130,6 +142,8 @@ uv init
 	1. 按'C'弹出提交面板
 	2. 填写提交信息
 
+
+> [!NOTE] 成就
 > 你已经达成成就 ==第一个提交== ;-)
 
 #### 用 OpenCode 和 Zed 打开项目
@@ -144,6 +158,7 @@ zed .
 
 #### 发送prompt
 
+> [!EXAMPLE] 示例
 > 请用 Python 写多个不同实现计算斐波那契数列的函数，包括：
 > 1. 递归实现
 > 2. 迭代实现
@@ -157,6 +172,7 @@ zed .
 uv run main.py
 ```
 
+> [!INFO] 碎碎念念
 > 如果没问题就可以提交了
 
 #### 提交然后推送到 GitHub
@@ -173,12 +189,12 @@ uv run main.py
 	2. 按'Space'切换到对应分支
 	3. 按'p'推送
 
-##### 错误
+> [!CAUTION] 注意
+> 你现在大概率无法推送，因为github的安全措施会拒绝没有访问仓库权限的令牌的请求
+> 你现在连令牌都没有
+> 我太懒了不想写了，你问AI吧 ;->>>
 
-你现在大概率无法推送，因为github的安全措施会拒绝没有访问仓库权限的令牌的请求
-你现在连令牌都没有
-我太懒了不想写了，你问AI吧 ;->>>
-
+> [!EXAMPLE] 示例
 > 请帮我配置 GitHub Token，让我能够推送代码到 GitHub 仓库
 
 配置步骤：
@@ -186,10 +202,12 @@ uv run main.py
 2. 勾选 `repo` 权限
 3. 生成后复制 Token
 4. 在命令行执行：
+
    ```bash
    git remote set-url origin https://你的用户名:你的Token@github.com/你的用户名/仓库名.git
    ```
 
+> [!INFO] 碎碎念念
 > 现在再试试推送吧 ;-)
 
 ##### 持久化配置
@@ -197,16 +215,11 @@ uv run main.py
 如果你不想每次都复制粘贴 Token，可以配置 credential helper：
 
 ```bash
-# Windows
 git config --global credential.helper manager
 
 # 第一次推送时输入用户名和 Token
 # 之后会自动记住
 ```
-
-> 在 Windows 上，凭证会保存在系统的 Credential Manager 中
-> 在 Mac 上，会保存在 Keychain 中
-> 在 Linux 上，可能需要安装 `libsecret` 或 `git-credential-libsecret`
 
 #### 第一次合并
 
@@ -222,6 +235,9 @@ git config --global credential.helper manager
 
 #### 创建 Pull Request
 
+> Pull Request 就是拉取请求，这是对仓库所有者而言的
+> 当你为一个项目修复了一个bug，就可提一个PR，让仓库所有者合并
+
 推送成功后，GitHub 会自动提示创建 Pull Request，或者手动：
 
 1. 打开仓库页面
@@ -230,6 +246,7 @@ git config --global credential.helper manager
 4. 填写标题和描述
 5. 点击 **Create pull request**
 
+> [!NOTE] 成就
 > 你已经达成成就 ==第一个 PR== ;-)
 
 #### 再一次推送到 Github
@@ -246,11 +263,12 @@ git config --global credential.helper manager
 - 如果结果不对，明确指出哪里不对
 ## 小结
 
-- 工具涉及核心概念：
-	- [[概念-API提供商|AI提供商]]
-	- [[概念-Agent工具|Agent]]
-	- [[概念-代码编辑器|代码编辑器]]
-	- [[概念-代码管理|代码管理]]
+> [!SUMMARY] 小结
+> - [[概念-API提供商|AI提供商]]
+> - [[概念-Agent工具|Agent]]
+> - [[概念-代码编辑器|代码编辑器]]
+> - [[概念-代码管理|代码管理]]
+
 ## 作业
 
 用 AI 辅助开发一个命令行 Todo List 应用。
@@ -265,6 +283,7 @@ git config --global credential.helper manager
 
 ### 示例 prompt
 
+> [!EXAMPLE] 示例
 > 请用 Python 写一个命令行 Todo List 应用，功能包括：
 > 1. 添加待办事项（输入内容，回车保存）
 > 2. 查看所有待办事项（显示序号和内容，已完成的显示 ✓）
@@ -289,7 +308,7 @@ stateDiagram-v2
     delete命令 --> 空闲状态 : 删除数据
 ```
 
-### 提交要求：完整开发流程
+### 提交要求
 
 按照以下步骤完成作业：
 

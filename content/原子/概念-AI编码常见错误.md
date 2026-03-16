@@ -1,7 +1,7 @@
 ---
 id: 202603090092
 aliases:
-  - 常见错误
+  - AI编码常见错误
 tags:
   - concept
 date: 2026-03-09
